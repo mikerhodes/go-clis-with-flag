@@ -1,7 +1,9 @@
-# Use of flags in "noun action --args" CLI applications
+# Use of `flag` in "noun action --args" CLI Go applications
 
 This little codebase shows an approach of using the Go `flag` package to
 implement command line applications that have "sub-commands" like `kubectl`.
+I find that it's simpler to use for many applications than pulling in a more
+feature-rich library.
 
 We have a "dispatcher" in the `cmd/foo` folder that gets built as the binary
 entrypoint. It uses the first application argument to discover what sub-command
@@ -18,10 +20,13 @@ want the same argument in both packages, you define it twice, in each `FlagSet`.
 
 Then you run like this after `make build`ing:
 
-```
-./foo bar --name mike --quantity 12
+```sh
+# bar shows how to use positional arguments after the --arg arguments,
+# including printing help text including them.
+./foo bar --quantity 12 Mike Rhodes
 
-./foo baz --quantity 12
+# baz just has two --arg arguments
+./foo baz --name mike --quantity 12
 ```
 
 So the dispatcher looks like this:
