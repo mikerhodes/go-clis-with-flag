@@ -1,2 +1,2 @@
 build:
-	go build ./cmd/foo
+	go build ./cmd/discourse
